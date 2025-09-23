@@ -8,9 +8,10 @@ import { ExpirationComponent } from './components/search/expiration/expiration.c
 import { AddressComponent } from './components/search/address/address.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { ErroComponent } from './components/erro/erro.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: ErroComponent },
     { path: 'new', component: FormComponent, resolve: { product: productResolver } },
     { path: 'edit/:id', component: FormComponent, resolve: { product: productResolver } },
     { path: 'findByName', component: NameComponent, resolve: { product: productResolver } },
