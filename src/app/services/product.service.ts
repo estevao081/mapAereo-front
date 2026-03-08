@@ -12,7 +12,7 @@ export class ProductService {
   constructor(private client: HttpClient) {
   }
 
-  private readonly API = 'http://localhost:8080/products'
+  private readonly API = 'https://mapaereo.onrender.com/products'
 
   listByName(): Observable<Product[]> {
     return this.client.get<Product[]>(`${this.API}/searchByName`);
