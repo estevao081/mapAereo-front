@@ -24,8 +24,7 @@ import { Router, RouterLink } from '@angular/router';
     MatIconModule,
     CommonModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
-    RouterLink
+    MatSnackBarModule
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

@@ -39,23 +39,26 @@ export class FormComponent {
     private route: ActivatedRoute
   ) {
     this.form = this.formBuilder.group({
-      id: [''],
-      code: [''],
+      id: [null],
+      code: [null],
       name: [''],
-      quantity: [''],
+      quantity: [null],
       expiration: [''],
       address: ['']
     })
 
-    const product: Product = this.route.snapshot.data['product']
-    this.form.setValue({
-      id: product.id,
-      code: product.code,
-      name: product.name,
-      quantity: product.quantity,
-      expiration: product.expiration,
-      address: product.address
-    })
+    const product: Product = this.route.snapshot.data['product'];
+
+    if (product) {
+      this.form.patchValue({
+        id: product.id,
+        code: product.code,
+        name: product.name,
+        quantity: product.quantity,
+        expiration: product.expiration,
+        address: product.address
+      });
+    }
   }
 
   onSubmit() {
