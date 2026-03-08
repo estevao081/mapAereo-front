@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +24,9 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatIconModule,
     CommonModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
-  ],
+    MatSnackBarModule,
+    RouterLink
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -33,34 +34,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent {
   constructor(
     private router: Router,
-    private route: ActivatedRoute
   ) { }
 
   onAdd() {
-    this.router.navigate(['new'], { relativeTo: this.route });
+    this.router.navigate(['new']);
   }
 
   onSearchName() {
-    this.router.navigate(['findByName'], { relativeTo: this.route });
+    this.router.navigate(['findByName']);
   }
 
   onSearchCode() {
-    this.router.navigate(['findByCode'], { relativeTo: this.route });
+    this.router.navigate(['findByCode']);
   }
 
   onSearchExpiration() {
-    this.router.navigate(['findByExpiration'], { relativeTo: this.route });
+    this.router.navigate(['findByExpiration']);
   }
 
   onSearchAddress() {
-    this.router.navigate(['findByAddress'], { relativeTo: this.route });
+    this.router.navigate(['findByAddress']);
   }
 
   onLogin() {
-    this.router.navigate(['auth/login'], {relativeTo: this.route })
+    this.router.navigate(['auth/login'])
   }
 
   onRegister() {
-    this.router.navigate(['auth/register'], {relativeTo: this.route })
+    this.router.navigate(['auth/register'])
   }
 }

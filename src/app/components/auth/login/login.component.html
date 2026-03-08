@@ -4,6 +4,7 @@
     <span>mapAereo</span>
   </mat-toolbar>
 </div>
+
 <div class="auth-page">
   <div class="auth-card">
     <h2>
@@ -12,19 +13,36 @@
       </button>
       Acessar Conta
     </h2>
-    <form>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+
       <div class="form-group">
         <label>Email</label>
-        <input type="email" placeholder="Digite seu email" />
+        <input type="email" formControlName="email" placeholder="Digite seu email" />
+
+        <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-text">
+          Email inválido
+        </small>
       </div>
+
       <div class="form-group">
         <label>Senha</label>
-        <input type="password" placeholder="Digite sua senha" />
+        <input type="password" formControlName="password" placeholder="Digite sua senha" />
+
+        <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-text">
+          Senha inválida (mínimo 6 caracteres)
+        </small>
       </div>
-      <button class="btn btn-primary">Entrar</button>
+
+      <button type="submit" class="btn btn-primary">
+        Entrar
+      </button>
+
     </form>
+
     <p class="switch-text">
-      Não tem conta? <a href="/cadastro">Criar agora</a>
+      Não tem conta? <a href="/auth/register">Criar agora</a>
     </p>
+
   </div>
 </div>

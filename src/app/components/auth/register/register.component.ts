@@ -21,7 +21,7 @@ export class RegisterComponent {
 
   constructor(
     private location: Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.registerForm = this.fb.group({
       nome: ['', Validators.required],
@@ -40,7 +40,6 @@ export class RegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       console.log('Cadastro enviado:', this.registerForm.value);
-      // aqui você chama o backend
     }
   }
 
