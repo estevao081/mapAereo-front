@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductService } from '../../services/product.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,6 +38,7 @@ export class FormComponent {
     private location: Location,
     private route: ActivatedRoute
   ) {
+
     this.form = this.formBuilder.group({
       id: [null],
       code: [null],
@@ -45,25 +46,37 @@ export class FormComponent {
       quantity: [null],
       expiration: [''],
       address: ['']
-    })
+    });
 
     const product: Product = this.route.snapshot.data['product'];
 
     if (product) {
-      this.form.patchValue({
-        id: product.id,
-        code: product.code,
-        name: product.name,
-        quantity: product.quantity,
-        expiration: product.expiration,
-        address: product.address
-      });
+      this.form.patchValue(product);
     }
   }
 
   onSubmit() {
-    this.service.save(this.form.value).subscribe(data => this.onSuccess(), error => this.onError());
-    this.form.reset();
+
+    if (this.form.invalid) return;
+
+    const formValue = this.form.getRawValue();
+
+    const payload: Partial<Product> = {
+      code: formValue.code,
+      name: formValue.name,
+      quantity: formValue.quantity,
+      expiration: formValue.expiration,
+      address: formValue.address
+    };
+
+    if (formValue.id) {
+      payload.id = formValue.id;
+    }
+
+    this.service.save(payload).subscribe({
+      next: () => this.onSuccess(),
+      error: () => this.onError()
+    });
   }
 
   onCancel() {
@@ -71,10 +84,10 @@ export class FormComponent {
   }
 
   private onSuccess() {
-    this.snackBar.open('Produto salvo com sucesso.', 'Fechar', { duration: 3000 })
+    this.snackBar.open('Produto salvo com sucesso.', 'Fechar', { duration: 3000 });
   }
 
   private onError() {
-    this.snackBar.open('Erro ao salvar produto.', 'Fechar', { duration: 3000 })
+    this.snackBar.open('Erro ao salvar produto.', 'Fechar', { duration: 3000 });
   }
 }
